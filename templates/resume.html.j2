@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ cv.identity.name }} — {{ cv.identity.title }}</title>
+<meta name="description" content="{{ cv.summary }}">
+{% if font_css %}<style>
+{{ font_css | safe }}
+</style>
+{% else %}<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+{% endif %}
+<style>
+  :root {
+    --accent: #1F3A5F;
+    --ink: #15181D;
+    --muted: #5C6672;
+    --hair: #C9D0D9;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 3rem 1.25rem 4rem;
+    background: #fff;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 46rem; margin: 0 auto; }
+  a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--hair); }
+  a:hover { border-bottom-color: var(--accent); }
+
+  header h1 {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+  header .tagline {
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin: 0.35rem 0 0.7rem;
+  }
+  header .rule { border: 0; border-top: 2px solid var(--accent); margin: 0 0 0.7rem; }
+  .contact { color: var(--muted); font-size: 0.85rem; }
+  .contact span + span::before { content: "·"; margin: 0 0.5rem; color: var(--hair); }
+
+  section { margin-top: 1.6rem; }
+  h2 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.3rem;
+  }
+  h2 + .hairline { border: 0; border-top: 1px solid var(--hair); margin: 0 0 0.8rem; }
+
+  .skills { display: grid; grid-template-columns: 8.5rem 1fr; gap: 0.4rem 1rem; margin: 0; }
+  .skills dt { text-align: right; color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+  .skills dd { margin: 0; }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1.1rem;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.7rem;
+    margin-bottom: 0.95rem;
+    break-inside: avoid;
+  }
+  .entry--minor { border-left-color: var(--hair); }
+  .entry .dates {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+    align-self: center;
+  }
+  .entry h3 { font-size: 1.05rem; font-weight: 600; margin: 0; display: inline; }
+  .entry .role { color: var(--muted); font-size: 0.85rem; margin-left: 0.5rem; }
+  .entry .note { color: var(--muted); font-size: 0.85rem; margin: 0.2rem 0 0; }
+  .entry ul { margin: 0.35rem 0 0; padding-left: 1.1rem; list-style: none; }
+  .entry ul li { margin: 0.15rem 0; }
+  .entry ul li::before { content: "–"; color: var(--accent); font-weight: 700; margin-left: -1.1rem; margin-right: 0.4rem; }
+  .entry .stack { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+
+  @media print {
+    body { padding: 0; font-size: 10.5pt; }
+    main { max-width: none; }
+    a { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>{{ cv.identity.name }}</h1>
+    <p class="tagline">{{ cv.identity.title }}</p>
+    <hr class="rule">
+    <p class="contact">
+      {% if cv.identity.email %}<span><a href="mailto:{{ cv.identity.email }}">{{ cv.identity.email }}</a></span>{% endif %}
+      {% if cv.identity.phone %}<span><a href="tel:{{ cv.identity.phone | replace(' ', '') }}">{{ cv.identity.phone }}</a></span>{% endif %}
+      {% if cv.identity.location %}<span>{{ cv.identity.location }}</span>{% endif %}
+      {% for link in cv.identity.links %}{% if link.url %}<span><a href="{{ link.url }}">{{ link.label }}</a></span>{% endif %}{% endfor %}
+    </p>
+  </header>
+
+  <section>
+    <h2>Profile</h2>
+    <hr class="hairline">
+    <p>{{ cv.summary }}</p>
+  </section>
+
+  <section>
+    <h2>Technical Skills</h2>
+    <hr class="hairline">
+    <dl class="skills">
+      {% for group in cv.skills %}{% if group['items'] %}
+      <dt>{{ group.label }}</dt>
+      <dd>{{ group['items'] | join(", ") }}</dd>
+      {% endif %}{% endfor %}
+    </dl>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+    <hr class="hairline">
+    {% for job in cv.experience %}
+    <article class="entry">
+      <div class="dates">{{ job.start }} – {{ job.end }}</div>
+      <div>
+        <h3>{{ job.company }}</h3><span class="role">{{ job.role }}</span>
+        {% if job.note %}<p class="note">{{ job.note }}</p>{% endif %}
+        {% if job.bullets %}<ul>{% for point in job.bullets %}<li>{{ point }}</li>{% endfor %}</ul>{% endif %}
+        {% if job.stack %}<p class="stack">{{ job.stack | join(" · ") }}</p>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+
+  {% for section_name, key in [("Patents", "patents"), ("Open Source", "open_source"), ("Notable Software", "software"), ("Education", "education")] %}{% set items = cv.get(key, []) %}{% if items %}
+  <section>
+    <h2>{{ section_name }}</h2>
+    <hr class="hairline">
+    {% for item in items %}
+    <article class="entry entry--minor">
+      <div class="dates">{{ item.dates }}</div>
+      <div>
+        {% if item.url %}<h3><a href="{{ item.url }}">{{ item.head }}</a></h3>{% else %}<h3>{{ item.head }}</h3>{% endif %}
+        {%- if item.sub %}<span class="role">{{ item.sub }}</span>{% endif %}
+        {%- if item.note %}<p class="note">{{ item.note }}</p>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}{% endfor %}
+</main>
+</body>
+</html>

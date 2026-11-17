@@ -1,0 +1,23 @@
+# rendered output — everything here is regenerable from content/ + src/ + templates/
+build/
+
+# nix
+result
+result-*
+.direnv/
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+
+# editors and macOS
+*.swp
+*~
+.vscode/
+.idea/
+.DS_Store
+
+# scratch
+*.tmp
+typst-docs/

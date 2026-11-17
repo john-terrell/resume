@@ -1,0 +1,167 @@
+# Content only — every visual decision lives in src/theme.typ.
+# Loaded by src/resume.typ via yaml() and by tools/build_html.py for the web
+# version. Blank or missing fields are skipped, so it is safe to leave a
+# section empty while it is still being written.
+
+meta:
+  schema: 1
+  updated: 2026-11-17
+
+identity:
+  name: John W. Terrell
+  title: Principal Software Engineer — 3D Graphics & User Interface
+  email: john@coolpeople.io
+  phone: 425-753-0575
+  location: Kirkland, WA
+  links:
+    - label: github.com/john-terrell
+      url: https://github.com/john-terrell
+
+summary: >-
+  Principal software engineer, thirty-seven years in the layer where pixels get
+  made: 3D graphics infrastructure for orbital and satellite visualization, the
+  browsing and media stacks at Microsoft, a Windows NT port to PowerPC, and
+  embedded firmware underneath. Two granted patents. Equally at home in a
+  kernel, a render loop, and a layout engine.
+
+skills:
+  - label: Languages
+    items: ["C/C++", "C#", "Rust", "Python"]
+  - label: Graphics
+    items: [OpenSceneGraph, OpenGL, Vulkan, "Unreal Engine", Bevy]
+  - label: User interface
+    items: [Qt, Flutter, XAML, Win32, OpenSceneGraph]
+  - label: Platforms
+    items: [Linux, macOS, Windows, iOS]
+
+experience:
+  - company: AlphaPixel
+    role: Principal Software Engineer — independent contractor
+    start: "2017"
+    end: Present
+    note: >-
+      Defense, aerospace and simulation customers: Orbital ATK, VT MAK,
+      Northrop Grumman, Teledyne Brown Engineering, Carnegie Robotics
+      Laboratories.
+    bullets:
+      - >-
+        Orbital ATK — 3D graphics infrastructure for their orbital
+        visualization platform on OpenSceneGraph, including a
+        logarithmic-depth (LogZ) buffer for the extreme depth range of orbital
+        scenes and visualization of satellite radio footprints.
+      - >-
+        Orbital ATK — LIDAR visualization in OpenSceneGraph for OART, their
+        satellite docking software, supporting the MEV program.
+      - >-
+        VT MAK — OpenSceneGraph performance work for VR-Vantage, MAK's real-time
+        image generator.
+      - >-
+        Teledyne Brown Engineering — Unreal Engine VR application, driven by
+        headsets, coupled to their EADSim virtual-battlefield simulation.
+      - >-
+        Carnegie Robotics — tablet-driven Qt application for interacting with
+        the GEARS platform.
+    stack: [OpenSceneGraph, "Unreal Engine", Qt, "C++"]
+
+  - company: CamanoLight
+    role: Co-owner — hardware design and firmware
+    start: "2015"
+    end: "2020"
+    note: >-
+      Own company, run concurrently with the Microsoft and AlphaPixel
+      engagements.
+    bullets:
+      - >-
+        Designed the hardware and implemented the firmware for iKommunicate, the
+        NMEA-to-Signal K gateway Digital Yacht brought to market — the bridge
+        between boat instrument networks and the open Signal K data format.
+    stack: [hardware design, firmware]
+
+  - company: Microsoft
+    role: Senior Software Engineer
+    location: Redmond, WA
+    start: "1998"
+    end: "2017"
+    note: >-
+      Nineteen years across browsing, media and graphics: ChromeEffects,
+      Windows Media Player, Internet Explorer and Edge.
+    bullets:
+      - >-
+        ChromeEffects: researched texture filtering and related techniques for
+        higher-quality 3D rendering on the web.
+      - >-
+        Windows Media Player: designed the database and architecture for media
+        metadata retrieval and display.
+      - >-
+        Internet Explorer / Edge: built novel visual navigation of browser
+        history driven by touch.
+      - Both granted patents came out of this work.
+    stack: ["C/C++", XAML, Win32]
+
+  - company: MetaCreations
+    role: Senior Software Engineer
+    start: "1996"
+    end: "1998"
+    note: 3D graphics for Bryce, the fractal landscape rendering application.
+    bullets:
+      - >-
+        Rendering work on Bryce, from fractal terrain generation through to the
+        final image.
+    stack: []
+
+  - company: IBM Corporation
+    role: Staff Software Engineer
+    start: "1994"
+    end: "1996"
+    note: Porting Windows NT to the PowerPC architecture.
+    bullets:
+      - Member of the team that brought Windows NT up on PowerPC hardware.
+    stack: []
+
+  - company: VideoKing Gaming Systems
+    role: Software Engineer
+    start: "1992"
+    end: "1994"
+    note: Firmware for video gambling machines.
+    bullets:
+      - Shipped firmware for regulated video gambling hardware.
+    stack: []
+
+  - company: Progressive Peripherals
+    role: Software Engineer
+    start: "1989"
+    end: "1992"
+    note: 3D graphics and embedded firmware.
+    bullets:
+      - >-
+        3D graphics hardware and the firmware that drove it — where the graphics
+        career started.
+    stack: []
+
+# Each entry: dates / head / sub / note / url — only head is required.
+patents:
+  - dates: "2010"
+    head: >-
+      Methods, computer-readable media, and data structures for building an
+      authoritative database of digital audio identifier elements and
+      identifying media items
+    sub: US 7,647,128
+  - dates: "2008"
+    head: Resolving metadata matched to media content
+    sub: US 7,392,477
+
+open_source:
+  - head: Rust on Microchip/Atmel SAM devices
+    sub: Co-author — embedded Rust for the SAM device family
+    url: https://github.com/atsam-rs
+
+software:
+  - dates: "1996"
+    head: Bryce
+    sub: MetaCreations — fractal 3D landscape renderer
+    url: https://en.wikipedia.org/wiki/Bryce_(software)
+
+education:
+  - dates: "1988"
+    head: University of Northern Colorado
+    sub: Coursework, no degree
