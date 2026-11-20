@@ -134,8 +134,7 @@ experience:
     note: 3D graphics and embedded firmware.
     bullets:
       - >-
-        3D graphics hardware and the firmware that drove it — where the graphics
-        career started.
+        3D graphics hardware and the firmware that drove it.
     stack: []
 
 # Each entry: dates / head / sub / note / url — only head is required.
