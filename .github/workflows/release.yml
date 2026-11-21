@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: determinate-systems/nix-installer@v15
+      - uses: DeterminateSystems/determinate-nix-action@v3.24.3
 
       - name: Sanity-check content
         run: nix develop --command just data
