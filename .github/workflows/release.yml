@@ -1,0 +1,36 @@
+# Tag-triggered release: push a date-based tag (e.g. 20261119) to build all
+# four resume formats in the flake and publish them as GitHub Release assets.
+name: release
+
+on:
+  push:
+    tags: ["20*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: determinate-systems/nix-installer@v15
+
+      - name: Sanity-check content
+        run: nix develop --command just data
+
+      - name: Build all formats
+        run: nix develop --command just build-all
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            build/Terrell-resume.pdf
+            build/Terrell-resume.html
+            build/Terrell-resume.docx
+            build/Terrell-resume.odt
+          fail_on_unmatched_files: true
+          generate_release_notes: true
